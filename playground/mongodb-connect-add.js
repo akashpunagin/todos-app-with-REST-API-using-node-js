@@ -2,8 +2,8 @@
 const {MongoClient, ObjectID} = require("mongodb"); // NOTE: This is object destructuring
 
 // Making a new object id
-var objId = new ObjectID();
-console.log(objId);
+// var objId = new ObjectID();
+// console.log(objId);
 
 // Database name
 const dbName = "TodoApp";
@@ -21,17 +21,17 @@ MongoClient.connect(
       var db = client.db(dbName);
 
       // // Add data to TodoApp database
-      // db.collection("Todos").insertOne({
-      //   text: "Something to do",
-      //   completed: false,
-      // }, (err, result) => {
-      //   if (err) {
-      //     console.log("Unable to insert todo", err);
-      //   } else {
-      //     console.log(JSON.stringify(result.ops, undefined, 2));
-      //     client.close();
-      //   }
-      // });
+      db.collection("Todos").insertOne({
+        text: "Eat lunch",
+        completed: false,
+      }, (err, result) => {
+        if (err) {
+          console.log("Unable to insert todo", err);
+        } else {
+          console.log(JSON.stringify(result.ops, undefined, 2));
+          client.close();
+        }
+      });
 
       // db.collection("Users").insertOne({
       //   name: "Akash",
