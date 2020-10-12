@@ -33,21 +33,22 @@ MongoClient.connect(
       // });
 
       // Fetch documents by ObjectID
-      // db.collection('Todos').find({
-      //   _id: new ObjectID('5f84210b1c4c682556d39bb6') ,
-      // }).toArray().then((docs) => {
-      //   console.log("Todos");
-      //   console.log(JSON.stringify(docs, undefined, 2));
-      // }, (err) => {
-      //   console.log("Unable to fetch todos", err);
-      // });
-
-      // document count
-      db.collection('Todos').find().count().then((count) => {
-        console.log(`Todos Count: ${count}`);
+      db.collection('Todos').find({
+        _id: new ObjectID('5f843b675f06142332b97025') ,
+      }).toArray().then((docs) => {
+        console.log("Todos");
+        console.log(JSON.stringify(docs, undefined, 2));
+        client.close();
       }, (err) => {
         console.log("Unable to fetch todos", err);
       });
+
+      // document count
+      // db.collection('Todos').find().count().then((count) => {
+      //   console.log(`Todos Count: ${count}`);
+      // }, (err) => {
+      //   console.log("Unable to fetch todos", err);
+      // });
 
 
     }
