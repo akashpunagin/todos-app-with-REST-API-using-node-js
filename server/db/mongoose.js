@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 // var URI = "mongodb+srv://akash:mongodbisgood@cluster0.hu8oa.mongodb.net/TodosApp?retryWrites=true&w=majority";
 var LOCALHOST_URI = "mongodb://localhost:27017/TodoApp";
 
+console.log("HERE", process.env.MONGODB_URI);
+
 // COnfigure mongoose
 mongoose.Promise = global.Promise;
 const config = {
