@@ -12,6 +12,8 @@ const todos = [{
 }, {
   _id: new ObjectID(),
   text: "second test",
+  completed: true,
+  completedAt: new Date(),
 }];
 
 // called before all tests
@@ -139,6 +141,38 @@ describe("DELETE /todos/:id", () => {
     request(app)
       .get(`/todos/123`)
       .expect(404)
+      .end(done);
+  });
+});
+
+describe("PUT /todos/:id", () => {
+  it("should udpate todo", (done) =>{
+    var id = todos[0]._id.toHexString();
+    var text = "this is updated text"
+    request(app)
+      .put(`/todos/${id}`)
+      .send({text: text, completed: true})
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.todo.text).toBe(text);
+        expect(res.body.todo.completed).toBe(true);
+        expect(res.body.todo.completedAt).not.toBe(null);
+      })
+      .end(done);
+  });
+
+  it("should clear completedAt when todo is not completed", (done) => {
+    var id = todos[1]._id.toHexString();
+    var text = "this is updated text for second entry"
+    request(app)
+      .put(`/todos/${id}`)
+      .send({text: text, completed: false})
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.todo.text).toBe(text);
+        expect(res.body.todo.completed).toBe(false);
+        expect(res.body.todo.completedAt).toBe(null);
+      })
       .end(done);
   });
 });
