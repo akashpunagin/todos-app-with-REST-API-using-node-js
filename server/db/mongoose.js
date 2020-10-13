@@ -8,6 +8,7 @@ const config = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true,
+  useFindAndModify: false
 };
 mongoose.connect(process.env.MONGODB_URI || LOCALHOST_URI, config).then(() => {
   console.log("Mongoose connected");
