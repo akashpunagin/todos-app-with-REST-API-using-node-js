@@ -7,6 +7,7 @@ const {Todo} = require('./models/todo');
 const {User} = require('./models/user');
 
 var app = express();
+const port = process.env.PORT || 3000;
 
 
 // Middleware
@@ -50,8 +51,12 @@ app.get("/todos/:id", (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("Stared server on port 3000");
+app.listen(port, () => {
+  console.log(`Stared server on port ${port}`);
 })
 
 module.exports = {app};
+
+/*
+mongodb+srv://akash:<mongodbisgood>@cluster0.hu8oa.mongodb.net/<Todos>?retryWrites=true&w=majority
+*/
