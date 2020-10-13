@@ -56,7 +56,3 @@ app.listen(port, () => {
 })
 
 module.exports = {app};
-
-/*
-mongodb+srv://akash:<mongodbisgood>@cluster0.hu8oa.mongodb.net/<Todos>?retryWrites=true&w=majority
-*/
