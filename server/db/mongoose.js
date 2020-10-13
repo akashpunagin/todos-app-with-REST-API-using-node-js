@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-var URI = "mongodb+srv://akash:mongodbisgood@cluster0.hu8oa.mongodb.net/Todos?retryWrites=true&w=majority";
-// var URI = "mongodb://localhost:27017/TodoApp"
+// var URI = "mongodb+srv://akash:mongodbisgood@cluster0.hu8oa.mongodb.net/TodosApp?retryWrites=true&w=majority";
+var LOCALHOST_URI = "mongodb://localhost:27017/TodoApp";
 
 // COnfigure mongoose
 mongoose.Promise = global.Promise;
@@ -10,6 +10,8 @@ const config = {
   useNewUrlParser: true,
   useCreateIndex: true,
 };
-mongoose.connect(URI, config);
+mongoose.connect(process.env.MONGODB_URI || LOCALHOST_URI, config).then(() => {
+  console.log("Mongoose connected");
+});
 
 module.exports = {mongoose};
