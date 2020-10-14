@@ -95,6 +95,19 @@ app.put("/todos/:id", (req, res) => {
   }
 });
 
+app.post("/users", (req, res) => {
+  var body = _.pick(req.body, ["email", "password"]);
+  var user = new User(body);
+  user.save().then(() => {
+    return user.generateAuthToken();
+  }).then((token) => {
+    console.log("User added: ", body.email);
+    res.header('x-auth', token).send(user);
+  }).catch((err) => {
+    res.status(404).send({err});
+  });
+});
+
 app.listen(port, () => {
   console.log(`Stared server on port ${process.env.PORT}`);
 })
