@@ -32,8 +32,24 @@ var UserSchema = new mongoose.Schema({
   }]
 });
 
-// Custom User instance methods
+// Custom User model methods
+UserSchema.statics.findByToken = function (token) {
+  var User = this;
+  var decoded;
 
+  try {
+    decoded = jwt.verify(token, 'abc123');
+    return User.findOne({
+      '_id': decoded._id,
+      'tokens.token': token,
+      'tokens.access': 'auth',
+    });
+  } catch (e) {
+    return Promise.reject();
+  }
+};
+
+// Custom User instance methods
 UserSchema.methods.toJSON = function () {
   var user = this;
   var userObject = user.toObject(); // convert monoose object to JS object
@@ -50,6 +66,7 @@ UserSchema.methods.generateAuthToken = function () {
   return user.save().then(() => {
     return token;
   });
+
 };
 
 var User = mongoose.model("User", UserSchema);
