@@ -86,6 +86,15 @@ UserSchema.statics.findByToken = function (token) {
 };
 
 // Custom User instance methods
+UserSchema.methods.removeToken = function (token) {
+  var user = this;
+  return user.updateOne({
+    $pull: {
+      tokens: {token}
+    }
+  });
+};
+
 UserSchema.methods.toJSON = function () {
   var user = this;
   var userObject = user.toObject(); // convert monoose object to JS object
