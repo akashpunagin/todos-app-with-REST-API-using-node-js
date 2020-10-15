@@ -16,6 +16,10 @@ var Todo = mongoose.model('Todo', {
     type: Date,
     // type: Number,
   },
+  _creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  }
 });
 
 
